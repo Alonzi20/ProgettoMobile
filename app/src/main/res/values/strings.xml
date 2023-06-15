@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Progetto</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_serie_a">Serie A</string>
+    <string name="menu_nba">NBA</string>
+    <string name="game_start">Partita iniziata</string>
+    <string name="game_finish">Partita finita</string>
+    <string name="score_variation">Gol</string>
+    <string name="serie_a_notification_channel_id" translatable="false">serie_a_channel</string>
+    <string name="nba_notification_channel_id" translatable="false">nba_channel</string>
+
+    <string name="body_da_cambiare">Oh però almeno va</string>
+</resources>

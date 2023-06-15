@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_serie_a">
+
+    <fragment
+        android:id="@+id/nav_serie_a"
+        android:name="it.unibo.demo.progetto.ui.serie_a.SerieAFragment"
+        android:label="@string/menu_serie_a"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_nba"
+        android:name="it.unibo.demo.progetto.ui.nba.NbaFragment"
+        android:label="@string/menu_nba"
+        tools:layout="@layout/fragment_gallery" />
+</navigation>
