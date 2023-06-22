@@ -11,8 +11,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import it.unibo.demo.progetto.R
-import it.unibo.demo.progetto.databinding.FragmentGalleryBinding
 import it.unibo.demo.progetto.databinding.FragmentNbaBinding
+import it.unibo.demo.progetto.ui.nba.subfragments.ClassificaNba
+import it.unibo.demo.progetto.ui.nba.subfragments.ClassificaNbaViewModel
+import it.unibo.demo.progetto.ui.nba.subfragments.GiornataNba
+import it.unibo.demo.progetto.ui.nba.subfragments.GiornataNbaViewModel
 
 class NbaFragment : Fragment() {
 
@@ -49,7 +52,6 @@ class NbaFragment : Fragment() {
         }
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
