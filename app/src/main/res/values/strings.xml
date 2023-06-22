@@ -16,4 +16,9 @@
     <string name="nba_notification_channel_id" translatable="false">nba_channel</string>
 
     <string name="body_da_cambiare">Oh però almeno va</string>
+
+    <array name="dropdown_items">
+        <item>Giornata</item>
+        <item>Classifica</item>
+    </array>
 </resources>
