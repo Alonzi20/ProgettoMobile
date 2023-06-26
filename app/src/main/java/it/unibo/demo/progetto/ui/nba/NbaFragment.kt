@@ -21,6 +21,7 @@ class NbaFragment : Fragment() {
 
     private var _binding: FragmentNbaBinding? = null
 
+    private lateinit var nbaViewModel: NbaViewModel
     private lateinit var giornatanbaViewModel: GiornataNbaViewModel
     private lateinit var classificanbaViewModel: ClassificaNbaViewModel
 
@@ -31,6 +32,7 @@ class NbaFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        nbaViewModel = ViewModelProvider(this).get(NbaViewModel::class.java)
         giornatanbaViewModel = ViewModelProvider(this).get(GiornataNbaViewModel::class.java)
         classificanbaViewModel = ViewModelProvider(this).get(ClassificaNbaViewModel::class.java)
     }
@@ -50,6 +52,9 @@ class NbaFragment : Fragment() {
         nbaViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        setupDropdownMenu(root)
+
         return root
     }
     override fun onDestroyView() {
@@ -58,7 +63,7 @@ class NbaFragment : Fragment() {
     }
 
     private fun setupDropdownMenu(view: View) {
-        val dropdownMenu = view.findViewById<Spinner>(R.id.dropdown_menu)
+        val dropdownMenu = view.findViewById<Spinner>(R.id.dropdown_menu_nba)
         val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dropdown_items, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         dropdownMenu.adapter = adapter

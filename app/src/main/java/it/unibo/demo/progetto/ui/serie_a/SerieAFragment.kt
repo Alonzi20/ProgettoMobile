@@ -21,6 +21,7 @@ class SerieAFragment : Fragment() {
 
     private var _binding: FragmentSerieABinding? = null
 
+    private lateinit var serieAViewModel: SerieAViewModel
     private lateinit var giornataViewModel: GiornataViewModel
     private lateinit var classificaViewModel: ClassificaViewModel
 
@@ -31,6 +32,7 @@ class SerieAFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        serieAViewModel = ViewModelProvider(this).get(SerieAViewModel::class.java)
         giornataViewModel = ViewModelProvider(this).get(GiornataViewModel::class.java)
         classificaViewModel = ViewModelProvider(this).get(ClassificaViewModel::class.java)
     }
@@ -50,6 +52,9 @@ class SerieAFragment : Fragment() {
         serieAViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        setupDropdownMenu(root)
+
         return root
     }
 
