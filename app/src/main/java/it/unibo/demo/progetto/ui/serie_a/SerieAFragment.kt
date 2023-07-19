@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import it.unibo.demo.progetto.R
@@ -42,16 +41,10 @@ class SerieAFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val serieAViewModel =
-            ViewModelProvider(this).get(SerieAViewModel::class.java)
+        ViewModelProvider(this).get(SerieAViewModel::class.java)
 
         _binding = FragmentSerieABinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        serieAViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         setupDropdownMenu(root)
 
@@ -65,7 +58,7 @@ class SerieAFragment : Fragment() {
 
     private fun setupDropdownMenu(view: View) {
         val dropdownMenu = view.findViewById<Spinner>(R.id.dropdown_menu)
-        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dropdown_items, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dropdown_items, R.layout.spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         dropdownMenu.adapter = adapter
 
