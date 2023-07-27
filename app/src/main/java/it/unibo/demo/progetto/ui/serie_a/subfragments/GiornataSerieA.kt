@@ -7,12 +7,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import it.unibo.demo.progetto.App
+import it.unibo.demo.progetto.R
 import it.unibo.demo.progetto.databinding.FragmentGiornataSerieABinding
+import it.unibo.demo.progetto.ui.adapters.MatchAdapter
+import it.unibo.demo.progetto.util.SerieAData
 
 class GiornataSerieA : Fragment()  {
     private var _binding: FragmentGiornataSerieABinding? = null
 
     internal lateinit var viewModel: GiornataViewModel
+
+    private lateinit var serieAData: SerieAData
 
     private val binding get() = _binding!!
 
@@ -21,17 +29,30 @@ class GiornataSerieA : Fragment()  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val giornataSerieAViewModel =
-            ViewModelProvider(this).get(GiornataViewModel::class.java)
+        ViewModelProvider(this).get(GiornataViewModel::class.java)
 
         _binding = FragmentGiornataSerieABinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val rootView = binding.root
 
-        val textView: TextView = binding.textGiornataSerieA
-        giornataSerieAViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        serieAData = SerieAData(App.footApiService)
+
+        val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)
+        val matchAdapter = MatchAdapter(emptyList())
+        recyclerView.adapter = matchAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        serieAData.getMatchesData(1) { matchList ->
+            if (matchList != null && matchList.isNotEmpty()) {
+                matchAdapter.updateData(matchList)
+
+                recyclerView.visibility = View.VISIBLE
+                binding.textGiornataSerieA.visibility = View.GONE
+            } else {
+                recyclerView.visibility = View.GONE
+                binding.textGiornataSerieA.visibility = View.VISIBLE
+            }
         }
-        return root
+
+        return rootView
     }
 
     override fun onDestroyView() {
