@@ -2,6 +2,8 @@ package it.unibo.demo.progetto
 
 import android.app.Application
 import it.unibo.demo.progetto.interfaces.FootApiService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,10 +17,21 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // Aggiungi questo blocco di codice per configurare l'interceptor per il logging delle richieste e delle risposte
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val httpClient = OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            // Aggiungi altri interceptor o configurazioni dell'OkHttpClient se necessario
+            .build()
+
         retrofit = Retrofit.Builder()
-            .baseUrl("https://api-football-v1.p.rapidapi.com/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl("https://footapi7.p.rapidapi.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient) // Usa l'OkHttpClient con l'interceptor
+            .build()
+
         footApiService = retrofit.create(FootApiService::class.java)
     }
 }
