@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import it.unibo.demo.progetto.App
@@ -24,17 +25,22 @@ class GiornataSerieA : Fragment()  {
     private lateinit var roundSpinner: Spinner
     private lateinit var serieAData: SerieAData
 
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw IllegalStateException("Binding is null")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //ViewModelProvider(this).get(GiornataViewModel::class.java)
+        val liveMatchesViewModel = ViewModelProvider(this).get(GiornataViewModel::class.java)
 
         _binding = FragmentGiornataSerieABinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)
+        val matchAdapter = MatchAdapter(emptyList())
+        recyclerView.adapter = matchAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Recupera il riferimento alla tendina
         roundSpinner = rootView.findViewById(R.id.roundSpinner)
@@ -50,22 +56,22 @@ class GiornataSerieA : Fragment()  {
                 // Recupera il numero selezionato
                 val selectedRound = parent?.getItemAtPosition(position).toString().toInt()
 
+                // Inizia il recupero periodico dei dati
+                liveMatchesViewModel.startPeriodicDataUpdate(selectedRound)
+
                 serieAData = SerieAData(App.footApiService)
 
-                val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)
-                val matchAdapter = MatchAdapter(emptyList())
-                recyclerView.adapter = matchAdapter
-                recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
                 serieAData.getMatchesData(selectedRound) { matchList ->
-                    if (matchList != null && matchList.isNotEmpty()) {
-                        matchAdapter.updateData(matchList)
+                    if(isAdded) {
+                        if (matchList != null && matchList.isNotEmpty()) {
+                            matchAdapter.updateData(matchList)
 
-                        recyclerView.visibility = View.VISIBLE
-                        binding.textGiornataSerieA.visibility = View.GONE
-                    } else {
-                        recyclerView.visibility = View.GONE
-                        binding.textGiornataSerieA.visibility = View.VISIBLE
+                            recyclerView.visibility = View.VISIBLE
+                            binding.textGiornataSerieA.visibility = View.GONE
+                        } else {
+                            recyclerView.visibility = View.GONE
+                            binding.textGiornataSerieA.visibility = View.VISIBLE
+                        }
                     }
                 }
             }

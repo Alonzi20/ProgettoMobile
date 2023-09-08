@@ -6,11 +6,9 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_serie_a"
-            android:icon="@drawable/serie_a_logo"
             android:title="@string/menu_serie_a" />
         <item
             android:id="@+id/nav_nba"
-            android:icon="@drawable/nba_logo"
             android:title="@string/menu_nba" />
     </group>
 </menu>

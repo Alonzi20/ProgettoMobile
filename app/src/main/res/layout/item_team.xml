@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Elementi grafici per visualizzare le informazioni della partita -->
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/teamColorsView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/teamColorsView"
+        app:layout_constraintWidth_percent="0.05" />
+
+    <ImageView
+        android:id="@+id/teamColorsView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/team_logo"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/position"
+        app:layout_constraintEnd_toStartOf="@+id/team"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.10" />
+
+    <TextView
+        android:id="@+id/team"
+        android:textSize="15sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/teamColorsView"
+        app:layout_constraintStart_toEndOf="@+id/teamColorsView"
+        app:layout_constraintWidth_percent="0.22"
+        app:layout_constraintBottom_toBottomOf="@+id/teamColorsView" />
+
+    <TextView
+        android:id="@+id/matches"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="top"
+        app:layout_constraintTop_toTopOf="@+id/teamColorsView"
+        app:layout_constraintEnd_toStartOf="@+id/points"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/teamColorsView"
+        app:layout_constraintWidth_percent="0.12" />
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/teamColorsView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.05"
+        app:layout_constraintBottom_toBottomOf="@+id/teamColorsView" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/teamColorsView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

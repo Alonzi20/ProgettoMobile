@@ -7,12 +7,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import it.unibo.demo.progetto.App
+import it.unibo.demo.progetto.R
 import it.unibo.demo.progetto.databinding.FragmentClassificaSerieABinding
+import it.unibo.demo.progetto.ui.adapters.MatchAdapter
+import it.unibo.demo.progetto.ui.adapters.TeamAdapter
+import it.unibo.demo.progetto.util.SerieAData
 
 class ClassificaSerieA : Fragment()  {
     private var _binding: FragmentClassificaSerieABinding? = null
 
     internal lateinit var viewModel: ClassificaViewModel
+
+    private lateinit var serieAData: SerieAData
 
     private val binding get() = _binding!!
 
@@ -21,17 +30,31 @@ class ClassificaSerieA : Fragment()  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val classificaSerieAViewModel =
-            ViewModelProvider(this).get(ClassificaViewModel::class.java)
+        ViewModelProvider(this).get(ClassificaViewModel::class.java)
 
         _binding = FragmentClassificaSerieABinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val rootView = binding.root
 
-        val textView: TextView = binding.textClassificaSerieA
-        classificaSerieAViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerViewClassificaSerieA)
+        val teamAdapter = TeamAdapter(emptyList())
+        recyclerView.adapter = teamAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        serieAData = SerieAData(App.footApiService)
+
+        serieAData.getLeagueTotalStandings { teamList ->
+            if (teamList != null && teamList.isNotEmpty()) {
+                teamAdapter.updateData(teamList)
+
+                recyclerView.visibility = View.VISIBLE
+                binding.textClassificaSerieA.visibility = View.GONE
+            } else {
+                recyclerView.visibility = View.GONE
+                binding.textClassificaSerieA.visibility = View.VISIBLE
+            }
         }
-        return root
+
+        return rootView
     }
 
     override fun onDestroyView() {

@@ -10,12 +10,9 @@ class Match(
     val homeScore: JsonObject,
     val awayScore: JsonObject,
     var homeTeamColors: TeamColors,
-    var awayTeamColors: TeamColors
-) {
-    fun setScore() {
-
-    }
-}
+    var awayTeamColors: TeamColors,
+    val tournament: Tournament
+)
 
 data class MatchResponse(
     @SerializedName("events")
@@ -26,4 +23,8 @@ data class MatchResponse(
 data class TeamColors(
     val primary: String,
     val secondary: String
+)
+
+data class Tournament(
+    val name: String
 )

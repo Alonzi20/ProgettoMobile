@@ -6,10 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".ui.serie_a.subfragments.ClassificaSerieA">
 
+    <include
+        android:id="@+id/serieALayout"
+        layout="@layout/fragment_serie_a"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/matchesLetter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="G"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pointsLetter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewClassificaSerieA"
+        app:layout_constraintWidth_percent="0.12"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/pointsLetter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="P"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewClassificaSerieA"
+        app:layout_constraintWidth_percent="0.05"
+        android:layout_marginTop="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewClassificaSerieA"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/serieALayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_marginTop="50dp" />
+
     <TextView
         android:id="@+id/text_classifica_serie_a"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/errore_di_caricamento"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
