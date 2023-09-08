@@ -17,6 +17,9 @@
 
     <string name="body_da_cambiare">Oh però almeno va</string>
     <string name="non_ci_sono_partite">Non ci sono partite</string>
+    <string name="errore_di_caricamento">Errore di caricamento</string>
+    <string name="email_alex">alex.lonzi@studio.unibo.it</string>
+    <string name="email_luca">luca.signorini12@studio.unibo.it</string>
 
     <array name="dropdown_items">
         <item>Giornata</item>
